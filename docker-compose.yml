@@ -3,8 +3,8 @@ services:
   first:
     image: nginx:latest
     ports:
-      - '8082:80'
-      - '4434:443'
+      - '8080:80'
+      - '4433:443'
     volumes:
       - ./first/conf.d/:/etc/nginx/conf.d
       - ./first/cert/:/etc/nginx/cert/
@@ -13,7 +13,7 @@ services:
     image: nginx:latest
     ports:
       - '8081:80'
-      - '4433:443'
+      - '4434:443'
     volumes:
       - ./proxy/conf.d/:/etc/nginx/conf.d
       - ./proxy/cert/:/etc/nginx/cert/
@@ -24,7 +24,7 @@ services:
   application:
     image: richarvey/nginx-php-fpm:latest
     ports:
-      - '8080:80'
+      - '8082:80'
     volumes:
       - ./app/conf.d:/etc/nginx/conf.d
       - ./app/html:/var/www/html
