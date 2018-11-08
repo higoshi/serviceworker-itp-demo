@@ -1,4 +1,4 @@
-# serviceworker-demo
+# serviceworker-itp-demo
 
 * with MacOS
 ```sh
