@@ -7,6 +7,7 @@
 cd serviceworker-itp-demo
 $ sudo -i
 # echo '127.0.0.1       loopback.example.net' >> /etc/hosts
+# echo '127.0.0.1       loopback1.example.net' >> /etc/hosts
 # exit
 
 $ openssl req -new -x509 -sha256 -newkey rsa:2048 -days 365 -nodes -out ./proxy/cert/crt.crt -keyout ./proxy/cert/key.key
@@ -16,5 +17,5 @@ $ openssl req -new -x509 -sha256 -newkey rsa:2048 -days 365 -nodes -out ./first/
 ## Start
 ```sh
 $ sudo docker-compose up -d
-$ open https://loopback.example.net:4433/
+$ open https://loopback1.example.net:4433/
 ```

@@ -1,11 +1,17 @@
 <!doctype html>
-<ul>
-  <li id="referrer"></li>
-  <li id="date"></li>>
+<ul id="ul">
 </ul>
 <script>
+  const ul = document.getElementById('ul');
+  function appendLog(label, text) {
+    const li = document.createElement('li');
+    li.innerText = `${label}: ${text}`;
+    ul.appendChild(li);
+  }
+
   void async function() {
-    document.getElementById('referrer').innerText = document.referrer;
+    appendLog('Referrer', document.referrer);
+
     if (!'serviceWorker' in navigator) throw 'Not supported ServiceWorker';
     const {serviceWorker} = navigator;
     const registration = await serviceWorker.register('./sw.js').catch((error) => {
@@ -20,8 +26,8 @@
 
     setInterval(async () => {
       const response = await fetch('api/getDate.php');
-      const text = await response.text();
-      document.getElementById('date').innerText = text;
+      const json = await response.json();
+      appendLog('getDate.php', json.date);
     }, 1000);
   }();
 </script>

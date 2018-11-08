@@ -9,6 +9,8 @@ services:
       - ./first/conf.d/:/etc/nginx/conf.d
       - ./first/cert/:/etc/nginx/cert/
       - ./first/html:/usr/share/nginx/html
+    depends_on:
+      - proxy
   proxy:
     image: nginx:latest
     ports:
