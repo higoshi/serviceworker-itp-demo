@@ -1,0 +1,34 @@
+version: '3'
+services:
+  first:
+    image: nginx:latest
+    ports:
+      - '8082:80'
+      - '4434:443'
+    volumes:
+      - ./first/conf.d/:/etc/nginx/conf.d
+      - ./first/cert/:/etc/nginx/cert/
+      - ./first/html:/usr/share/nginx/html
+  proxy:
+    image: nginx:latest
+    ports:
+      - '8081:80'
+      - '4433:443'
+    volumes:
+      - ./proxy/conf.d/:/etc/nginx/conf.d
+      - ./proxy/cert/:/etc/nginx/cert/
+    depends_on:
+      - application
+    networks:
+      - proxy
+  application:
+    image: richarvey/nginx-php-fpm:latest
+    ports:
+      - '8080:80'
+    volumes:
+      - ./app/conf.d:/etc/nginx/conf.d
+      - ./app/html:/var/www/html
+    networks:
+      - proxy
+networks:
+  proxy:
